@@ -1,0 +1,44 @@
+html {
+  box-sizing: border-box;
+}
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body,
+html {
+  width: 100vw;
+  background-color: #0d0d0d;
+  font-family: 'Karla', sans-serif;
+  font-size: 16px;
+  color: #ffffff;
+  /* Allow for fixed footer */
+  padding-bottom: 64px;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Rubik', sans-serif;
+  font-weight: bold;
+}
+a {
+  color: #eb5d60;
+}
+a:focus,
+button:focus {
+  outline-color: #eb5d60;
+}
+
+::selection {
+  background: #eb5d60;
+  color: white;
+}
+
+button:hover {
+  cursor: pointer;
+}
