@@ -229,7 +229,7 @@ const Home: React.FC = () => {
         </Heading>
         <Copy>
           If you were served with an eviction notice <strong>between March 27 and June 25</strong>,
-          you may qualify for releif under the CARES act.
+          you may qualify for relief under the CARES act.
         </Copy>
       </Section>
 
