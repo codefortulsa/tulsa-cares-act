@@ -161,7 +161,7 @@ const Property: React.FC = () => {
           {covered === false && (
             <>
               <CoveredHeading>
-                This property is <strong>not covered</strong> by the CARES act.
+                This property <strong>may not be covered</strong> by the CARES act.
               </CoveredHeading>
               <CoveredCopy>
                 Our records show this property does not meet requirements for the CARES act.{' '}

@@ -1,6 +1,5 @@
 import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import styled from 'styled-components/macro';
-// import lunr from 'lunr';
 import FuzzySearch from 'fuzzy-search';
 import { Link, useHistory } from 'react-router-dom';
 import useProperties from '../hooks/useProperties';
