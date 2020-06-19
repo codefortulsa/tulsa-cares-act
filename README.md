@@ -3,7 +3,7 @@
 </p>
 
 <h3 align="center">
-  <b>See if a property in Tulsa County is eligible for eviction protection under the CARES act at <a href="https://TulsaCaresAct.org">TulsaCaresAct.com</a></b>
+  <b>See if a property in Tulsa County is eligible for eviction protection under the CARES act at <a href="https://TulsaCaresAct.com">TulsaCaresAct.com</a></b>
 </h3>
 
 In partnership with [Housing Solutions](https://www.facebook.com/pages/category/Cause/Housing-Solutions-Tulsa-105568634392642/), Code for Tulsa has assembled this responsive web app allowing families to understand their rights during the eviction moratorium.
