@@ -164,10 +164,11 @@ const Property: React.FC = () => {
                 This property <strong>may not be covered</strong> by the CARES act.
               </CoveredHeading>
               <CoveredCopy>
-                Our records show this property does not meet requirements for the CARES act.{' '}
+                While this property is not covered according to publicly available information on
+                federally-backed mortgages, it may be covered under other provisions of the CARES
+                Act.{' '}
                 <strong>
-                  However, you may still be able to get support! If you have received an eviction
-                  notice or summons, please follow the steps below:
+                  You may still be able to get support! Please follow the steps below:
                 </strong>
               </CoveredCopy>
             </>
