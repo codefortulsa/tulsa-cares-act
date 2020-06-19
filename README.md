@@ -3,12 +3,12 @@
 </p>
 
 <h3 align="center">
-  <b>See if an address in Tulsa County is eligible for eviction relief under the CARES act at <a href="https://tbd.org">tbd.org</a></b>
+  <b>See if a property in Tulsa County is eligible for eviction protection under the CARES act at <a href="https://TulsaCaresAct.org">TulsaCaresAct.com</a></b>
 </h3>
 
 In partnership with [Housing Solutions](https://www.facebook.com/pages/category/Cause/Housing-Solutions-Tulsa-105568634392642/), Code for Tulsa has assembled this responsive web app allowing families to understand their rights during the eviction moratorium.
 
-> In an effort to help renters amid the coronavirus pandemic and skyrocketing unemployment, the March 27 CARES Act banned eviction filings for all federally backed rental units nationwide, more than a quarter of the total.
+> In an effort to help renters amid the coronavirus pandemic and skyrocketing unemployment, the March 27 CARES Act banned eviction filings for all federally backed rental units nationwide.
 >
 > [Despite Federal Ban, Landlords Are Still Moving to Evict People During the Pandemic](https://www.propublica.org/article/despite-federal-ban-landlords-are-still-moving-to-evict-people-during-the-pandemic)
 > -ProPublica
@@ -53,21 +53,9 @@ To learn React, check out the [React documentation](https://reactjs.org/).
 
 **If you'd like to run a local version of the app, follow these instructions below:**
 
-> **Please note before cloning:** You'll need special access to the firebase project to get things working properly—even locally. Please reach out if you're looking to contribute to this project or investigate further.
-
 - Clone the repo, and in the root directory run `yarn install` to download all project depencies. (_You may need to get [Yarn](https://yarnpkg.com/en/) if you haven't already..._)
 - Run `yarn start` to spin up a locally running version of the site.
-- Make sure you have either placed the _`.env`_ file from Code for Tulsa's 1Pass account into your root directory, OR edit the environment variables in _`App.tsx`_ to link to appropriate API keys and resources.
-
-> Your _`.env`_ file should look a little something like:
->
-> ```
-> REACT_APP_GOOGLE_SHEET_ID=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-> REACT_APP_GOOGLE_SHEET_NAME=Locations
->
-> REACT_APP_GOOGLE_API_KEY=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-> REACT_APP_GOOGLE_ANALYTICS_TRACKING_CODE=UA-xxxxxxxxx-x
-> ```
+- Visit `http://localhost:3000` to see the site in your browser
 
 ## Deployment
 

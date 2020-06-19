@@ -2,16 +2,17 @@ import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react'
 import styled from 'styled-components/macro';
 import Fuse from 'fuse.js';
 import { Link, useHistory } from 'react-router-dom';
+import useProperties from '../hooks/useProperties';
+import usePageView from '../hooks/usePageView';
+import { analytics } from '../lib/firebase';
 
+import Loader from '../components/Loader';
 import Section from '../components/Section';
 import Spacer from '../components/Spacer';
 import { ReactComponent as EvictionSvg } from '../img/eviction.svg';
 import { ReactComponent as SearchSvg } from '../img/search.svg';
 import { ReactComponent as UpArrowSvg } from '../img/up-arrow.svg';
 import Footer from '../components/Footer';
-
-// Temporary Data
-import data from '../tmp-data';
 
 // Heading Section
 const StyledEvictionSvg = styled(EvictionSvg)`
@@ -20,6 +21,7 @@ const StyledEvictionSvg = styled(EvictionSvg)`
   margin: 24px auto;
 `;
 const Heading = styled.h1`
+  max-width: 640px;
   margin: 0;
   padding: 0 0 16px;
   font-size: 28px;
@@ -30,9 +32,11 @@ const Heading = styled.h1`
   }
 `;
 const Copy = styled.p`
+  max-width: 640px;
   margin: 0;
   padding: 0 0 64px;
-  line-height: 20px;
+  font-size: 18px;
+  line-height: 22px;
   color: ${({ theme }) => theme.colors.grey.base};
   strong {
     color: ${({ theme }) => theme.colors.grey.dark};
@@ -161,22 +165,18 @@ if (!String.prototype.trimStart) {
 }
 
 const Home: React.FC = () => {
+  usePageView('Tulsa County CARES Act - Covered Properties Database');
+
   const history = useHistory();
+
+  // Eviction properties from GSheet
+  const [properties, propertiesAreFetching] = useProperties();
 
   // Search handling
   const [searchInput, setSearchInput] = useState('');
   const isSearching = !!searchInput.trim();
   // Initialize fuzzy search with fuse.js
-  const fuse = useMemo(
-    () =>
-      new Fuse(data, {
-        distance: 50,
-        threshold: 0.5,
-        minMatchCharLength: 3,
-        keys: ['name', 'address'],
-      }),
-    []
-  );
+  const fuse = useMemo(() => new Fuse(properties, { keys: ['name', 'address'] }), [properties]);
   const results = useMemo(() => {
     return fuse.search(searchInput).slice(0, 5);
   }, [fuse, searchInput]);
@@ -188,16 +188,23 @@ const Home: React.FC = () => {
     (e: KeyboardEvent) => {
       if (e.key === 'ArrowDown' && selectIndex < results.length) {
         setSelectIndex(prev => prev + 1);
+        analytics.logEvent('arrow-navigate', { direction: 'down' });
       }
       if (e.key === 'ArrowUp' && selectIndex !== 0) {
         setSelectIndex(prev => prev - 1);
+        analytics.logEvent('arrow-navigate', { direction: 'up' });
       }
       if (e.key === 'Enter' && selectIndex <= results.length) {
         const search =
           selectIndex === results.length
             ? searchInput
             : results[selectIndex].item.name || results[selectIndex].item.address;
-        history.push(`/search/${encodeURIComponent(search)}`);
+        analytics.logEvent('select-property', {
+          method: selectIndex === results.length ? 'Enter press custom' : 'Enter press',
+          resultPosition: selectIndex + 1,
+          searchLength: searchInput.trim().length,
+        });
+        history.push(`/property/${encodeURIComponent(search)}`);
       }
     },
     [history, results, searchInput, selectIndex]
@@ -221,15 +228,17 @@ const Home: React.FC = () => {
 
   return (
     <>
+      {propertiesAreFetching && <Loader />}
+
       {/* Top/Heading Section */}
       <Section primary>
         <StyledEvictionSvg />
         <Heading>
-          Are you <strong>facing eviction</strong> in Tulsa County?
+          Are you <strong>at risk of eviction</strong> in Tulsa County?
         </Heading>
         <Copy>
-          If you were served with an eviction notice <strong>between March 27 and June 25</strong>,
-          you may qualify for relief under the CARES act.
+          If you received a notice or a summons <strong>after March 27</strong>, you may qualify for
+          protection under the CARES act.
         </Copy>
       </Section>
 
@@ -255,17 +264,31 @@ const Home: React.FC = () => {
           <ResultsWrapper>
             {results.map(({ item }, i) => (
               <ResultLink
-                to={`/search/${encodeURIComponent(item.name || item.address)}`}
+                to={`/property/${encodeURIComponent(item.name || item.address)}`}
                 key={item.name + item.address}
                 selected={i === selectIndex}
+                onClick={() =>
+                  analytics.logEvent('select-property', {
+                    method: 'Select result',
+                    resultPosition: selectIndex + 1,
+                    searchLength: searchInput.trim().length,
+                  })
+                }
               >
                 {item.name || item.address} <small>{!!item.name && item.address}</small>
               </ResultLink>
             ))}
             {/* Always add current input as final result */}
             <ResultLink
-              to={`/search/${encodeURIComponent(searchInput)}`}
+              to={`/property/${encodeURIComponent(searchInput)}`}
               selected={selectIndex === results.length}
+              onClick={() =>
+                analytics.logEvent('select-property', {
+                  method: 'Select custom result',
+                  resultPosition: selectIndex + 1,
+                  searchLength: searchInput.trim().length,
+                })
+              }
             >
               {searchInput}
             </ResultLink>
