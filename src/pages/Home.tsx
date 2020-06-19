@@ -1,6 +1,7 @@
 import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react';
 import styled from 'styled-components/macro';
-import Fuse from 'fuse.js';
+// import lunr from 'lunr';
+import FuzzySearch from 'fuzzy-search';
 import { Link, useHistory } from 'react-router-dom';
 import useProperties from '../hooks/useProperties';
 import usePageView from '../hooks/usePageView';
@@ -175,11 +176,16 @@ const Home: React.FC = () => {
   // Search handling
   const [searchInput, setSearchInput] = useState('');
   const isSearching = !!searchInput.trim();
-  // Initialize fuzzy search with fuse.js
-  const fuse = useMemo(() => new Fuse(properties, { keys: ['name', 'address'] }), [properties]);
-  const results = useMemo(() => {
-    return fuse.search(searchInput).slice(0, 5);
-  }, [fuse, searchInput]);
+
+  // Initialize fuzzy search
+  const fuzzySearch = useMemo(
+    () => new FuzzySearch(properties, ['name', 'address'], { sort: true }),
+    [properties]
+  );
+  const results = useMemo(() => fuzzySearch.search(searchInput).slice(0, 6), [
+    fuzzySearch,
+    searchInput,
+  ]);
 
   // Selected result handling
   const [selectIndex, setSelectIndex] = useState(0);
@@ -198,7 +204,7 @@ const Home: React.FC = () => {
         const search =
           selectIndex === results.length
             ? searchInput
-            : results[selectIndex].item.name || results[selectIndex].item.address;
+            : results[selectIndex].name || results[selectIndex].address;
         analytics.logEvent('select-property', {
           method: selectIndex === results.length ? 'Enter press custom' : 'Enter press',
           resultPosition: selectIndex + 1,
@@ -262,10 +268,10 @@ const Home: React.FC = () => {
         {/* Search results ( only shown when searching ) */}
         {isSearching && (
           <ResultsWrapper>
-            {results.map(({ item }, i) => (
+            {results.map(({ name, address }, i) => (
               <ResultLink
-                to={`/property/${encodeURIComponent(item.name || item.address)}`}
-                key={item.name + item.address}
+                to={`/property/${encodeURIComponent(name || address)}`}
+                key={name + address}
                 selected={i === selectIndex}
                 onClick={() =>
                   analytics.logEvent('select-property', {
@@ -275,7 +281,7 @@ const Home: React.FC = () => {
                   })
                 }
               >
-                {item.name || item.address} <small>{!!item.name && item.address}</small>
+                {name || address} <small>{!!name && address}</small>
               </ResultLink>
             ))}
             {/* Always add current input as final result */}
