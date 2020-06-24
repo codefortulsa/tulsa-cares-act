@@ -12,7 +12,7 @@ const OuterWrapper = styled.div<Props>`
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: ${({ theme }) => theme.colors.grey.darkest};
+  background-color: ${({ theme }) => theme.grey.darkest};
 `;
 const InnerWrapper = styled.div`
   margin: 0 auto;
@@ -28,7 +28,7 @@ const Button = styled.button<{ active?: boolean }>`
   border: none;
   padding: 16px 8px;
   text-decoration: ${({ active }) => (active ? 'underline' : 'none')};
-  color: ${({ active, theme }) => (active ? theme.colors.primary : theme.colors.grey.light)};
+  color: ${({ active, theme }) => (active ? theme.primary : theme.grey.light)};
   &:hover {
     text-decoration: underline;
   }

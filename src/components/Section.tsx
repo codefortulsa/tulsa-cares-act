@@ -10,8 +10,8 @@ const OuterWrapper = styled.div<Props>`
   /* position: ${({ primary }) => (primary ? 'sticky' : 'relative')}; */
   top: 0;
   width: 100%;
-  background-color: ${({ primary, theme }) => (primary ? theme.colors.white : theme.colors.black)};
-  color: ${({ primary, theme }) => (primary ? theme.colors.black : theme.colors.white)};
+  background-color: ${({ primary, theme }) => (primary ? theme.white : theme.black)};
+  color: ${({ primary, theme }) => (primary ? theme.black : theme.white)};
 `;
 const InnerWrapper = styled.div`
   margin: 0 auto;

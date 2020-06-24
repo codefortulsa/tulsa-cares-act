@@ -27,15 +27,15 @@ h6 {
   font-weight: bold;
 }
 a {
-  color: #eb5d60;
+  color: #287b71;
 }
 a:focus,
 button:focus {
-  outline-color: #eb5d60;
+  outline-color: #287b71;
 }
 
 ::selection {
-  background: #eb5d60;
+  background: #287b71;
   color: white;
 }
 

@@ -15,7 +15,7 @@ const StyledBackLink = styled(Link)`
   display: inline-flex;
   align-items: center;
 
-  color: ${({ theme }) => theme.colors.grey.base};
+  color: ${({ theme }) => theme.grey.base};
   text-decoration: none;
   &:hover {
     text-decoration: underline;

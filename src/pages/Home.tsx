@@ -28,7 +28,7 @@ const Heading = styled.h1`
   line-height: 34px;
   strong {
     text-decoration: underline;
-    text-decoration-color: ${({ theme }) => theme.colors.primary};
+    text-decoration-color: ${({ theme }) => theme.primaryAccent};
   }
 `;
 const Copy = styled.p`
@@ -37,9 +37,9 @@ const Copy = styled.p`
   padding: 0 0 64px;
   font-size: 18px;
   line-height: 22px;
-  color: ${({ theme }) => theme.colors.grey.base};
+  color: ${({ theme }) => theme.grey.base};
   strong {
-    color: ${({ theme }) => theme.colors.grey.dark};
+    color: ${({ theme }) => theme.grey.dark};
   }
 `;
 // Search Section
@@ -49,9 +49,9 @@ const SearchWrapper = styled.div`
   margin: -25px auto -25px;
   max-width: 768px;
   padding: 0 24px;
-  overflow: hidden;
+  /* overflow: hidden;
   white-space: nowrap;
-  text-overflow: ellipsis;
+  text-overflow: ellipsis; */
 `;
 const StyledSearchSvg = styled(SearchSvg)`
   position: absolute;
@@ -65,13 +65,13 @@ const SearchInput = styled.input`
   padding: 12px 0 12px 42px;
 
   border-radius: 8px;
-  border: 3px solid ${({ theme }) => theme.colors.grey.lightest};
+  border: 3px solid ${({ theme }) => theme.grey.lightest};
   box-shadow: 0px 0px 0.996336px rgba(13, 13, 13, 0.0383252),
     0px 0px 2.75474px rgba(13, 13, 13, 0.055), 0px 0px 6.63236px rgba(13, 13, 13, 0.0716748),
     0px 0px 22px rgba(13, 13, 13, 0.11);
   &:focus {
     outline: none;
-    border: 3px solid ${({ theme }) => theme.colors.primary};
+    border: 3px solid ${({ theme }) => theme.primary};
   }
 
   overflow: hidden;
@@ -81,11 +81,11 @@ const SearchInput = styled.input`
   font-size: 18px;
   font-weight: bold;
   line-height: 18px;
-  color: ${({ theme }) => theme.colors.black};
-  caret-color: ${({ theme }) => theme.colors.primary};
+  color: ${({ theme }) => theme.black};
+  caret-color: ${({ theme }) => theme.primary};
   &::placeholder {
     font-weight: normal;
-    color: ${({ theme }) => theme.colors.grey.base};
+    color: ${({ theme }) => theme.grey.base};
     opacity: 1;
   }
 `;
@@ -98,7 +98,7 @@ const ResultsWrapper = styled.div`
 
   padding: 6px 0 0;
   border-radius: 6px;
-  background-color: ${({ theme }) => theme.colors.grey.lightest};
+  background-color: ${({ theme }) => theme.grey.lightest};
 `;
 const ResultLink = styled(Link)<{ selected: boolean }>`
   display: block;
@@ -107,23 +107,22 @@ const ResultLink = styled(Link)<{ selected: boolean }>`
   text-overflow: ellipsis;
 
   padding: ${({ selected }) => (selected ? `6px 12px 6px 6px` : '6px 12px')};
-  border-left: ${({ selected, theme }) =>
-    selected ? `6px solid ${theme.colors.primary}` : 'none'};
-  background-color: ${({ selected, theme }) => (selected ? theme.colors.white : 'none')};
+  border-left: ${({ selected, theme }) => (selected ? `6px solid ${theme.primaryAccent}` : 'none')};
+  background-color: ${({ selected, theme }) => (selected ? theme.white : 'none')};
 
   font-family: 'Rubik';
   font-weight: bold;
   font-size: 18px;
   line-height: 20px;
   text-decoration: none;
-  color: ${({ selected, theme }) => (selected ? theme.colors.primary : theme.colors.black)};
+  color: ${({ selected, theme }) => (selected ? theme.primary : theme.black)};
   small {
     display: block;
     font-family: 'Karla';
     font-weight: normal;
     font-size: 14px;
     line-height: 16px;
-    color: ${({ theme }) => theme.colors.grey.base};
+    color: ${({ theme }) => theme.grey.base};
   }
 `;
 // Post-search Section
@@ -137,7 +136,7 @@ const SearchInstructions = styled.div`
   padding: 0 12px;
   text-align: center;
   line-height: 18px;
-  color: ${({ theme }) => theme.colors.grey.light};
+  color: ${({ theme }) => theme.grey.light};
 `;
 
 // Helpers

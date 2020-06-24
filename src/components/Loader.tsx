@@ -34,7 +34,7 @@ const Loader = styled.div`
     width: 200px;
     height: 4px;
     border-radius: 2px;
-    background-color: ${({ theme }) => theme.colors.primary};
+    background-color: ${({ theme }) => theme.primary};
     animation: ${LoadingAnimation} 600ms cubic-bezier(0.4, 0, 0.2, 1) infinite;
   }
 `;
