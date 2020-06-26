@@ -182,7 +182,9 @@ const About: React.FC = () => {
         <Spacer height='24px' />
         <Copy>
           Additional questions about this database can be sent to{' '}
-          <a href='mailto:tbd@email.com'>tbd@email.com</a>
+          <a href='mailto:evictions@housingsolutionstulsa.org'>
+            evictions@housingsolutionstulsa.org
+          </a>
         </Copy>
       </Section>
 

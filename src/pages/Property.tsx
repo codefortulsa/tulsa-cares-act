@@ -278,7 +278,7 @@ const Property: React.FC = () => {
                 <small>
                   <a
                     href={`mailto:${encodeURIComponent(
-                      'Tulsa CARES Act Admin<erin.willis@housingsolutionstulsa.org>'
+                      'Tulsa CARES Act Admin<evictions@housingsolutionstulsa.org'
                     )}?subject=${encodeURIComponent(
                       'Tulsa CARES Act - Missing Property'
                     )}&body=${encodeURIComponent(
