@@ -9,38 +9,54 @@ import { analytics } from '../lib/firebase';
 import Loader from '../components/Loader';
 import Section from '../components/Section';
 import Spacer from '../components/Spacer';
-import { ReactComponent as EvictionSvg } from '../img/eviction.svg';
+import BG from '../img/bg.jpg';
 import { ReactComponent as SearchSvg } from '../img/search.svg';
 import { ReactComponent as UpArrowSvg } from '../img/up-arrow.svg';
 import Footer from '../components/Footer';
 
 // Heading Section
-const StyledEvictionSvg = styled(EvictionSvg)`
-  width: 100%;
-  height: 64px;
-  margin: 24px auto;
+const HeadingWrapper = styled.div`
+  background-image: url("${BG}");
+  background-size: cover;
+  background-position: center;
 `;
 const Heading = styled.h1`
-  max-width: 640px;
-  margin: 0;
-  padding: 0 0 16px;
-  font-size: 28px;
-  line-height: 34px;
-  strong {
-    text-decoration: underline;
-    text-decoration-color: ${({ theme }) => theme.primaryAccent};
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  border-top: 4px solid ${({ theme }) => theme.primaryAccent};
+  border-bottom: 4px solid ${({ theme }) => theme.primaryAccent};
+  text-align: center;
+  font-size: 36px;
+  line-height: 40px;
+  @media (min-width: 768px) {
+    font-size: 48px;
+    line-height: 52px;
   }
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-shadow: 0px 0px 0.553451px rgba(0, 0, 0, 0.101212), 0px 0px 1.33002px rgba(0, 0, 0, 0.145401),
+    0px 0px 2.50431px rgba(0, 0, 0, 0.18), 0px 0px 4.46726px rgba(0, 0, 0, 0.214599),
+    0px 0px 8.35552px rgba(0, 0, 0, 0.258788), 0px 0px 20px rgba(0, 0, 0, 0.36);
+`;
+const Subheading = styled.h2`
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 16px 24px 32px;
+  text-align: center;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-shadow: 0px 0px 0.553451px rgba(0, 0, 0, 0.101212), 0px 0px 1.33002px rgba(0, 0, 0, 0.145401),
+    0px 0px 2.50431px rgba(0, 0, 0, 0.18), 0px 0px 4.46726px rgba(0, 0, 0, 0.214599),
+    0px 0px 8.35552px rgba(0, 0, 0, 0.258788), 0px 0px 20px rgba(0, 0, 0, 0.36);
 `;
 const Copy = styled.p`
-  max-width: 640px;
   margin: 0;
-  padding: 0 0 64px;
+  padding: 24px 24px 52px;
+  text-align: center;
   font-size: 18px;
   line-height: 22px;
-  color: ${({ theme }) => theme.grey.base};
-  strong {
-    color: ${({ theme }) => theme.grey.dark};
-  }
+  background-color: rgba(17, 86, 111, 0.8);
 `;
 // Search Section
 const SearchWrapper = styled.div`
@@ -49,9 +65,6 @@ const SearchWrapper = styled.div`
   margin: -25px auto -25px;
   max-width: 768px;
   padding: 0 24px;
-  /* overflow: hidden;
-  white-space: nowrap;
-  text-overflow: ellipsis; */
 `;
 const StyledSearchSvg = styled(SearchSvg)`
   position: absolute;
@@ -71,7 +84,7 @@ const SearchInput = styled.input`
     0px 0px 22px rgba(13, 13, 13, 0.11);
   &:focus {
     outline: none;
-    border: 3px solid ${({ theme }) => theme.primary};
+    border: 3px solid ${({ theme }) => theme.primaryAccent};
   }
 
   overflow: hidden;
@@ -92,7 +105,6 @@ const SearchInput = styled.input`
 const ResultsWrapper = styled.div`
   z-index: 225;
   position: relative;
-  /* max-height: 256px; */
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch;
 
@@ -110,7 +122,6 @@ const ResultLink = styled(Link)<{ selected: boolean }>`
   border-left: ${({ selected, theme }) => (selected ? `6px solid ${theme.primaryAccent}` : 'none')};
   background-color: ${({ selected, theme }) => (selected ? theme.white : 'none')};
 
-  font-family: 'Rubik';
   font-weight: bold;
   font-size: 18px;
   line-height: 20px;
@@ -118,7 +129,6 @@ const ResultLink = styled(Link)<{ selected: boolean }>`
   color: ${({ selected, theme }) => (selected ? theme.primary : theme.black)};
   small {
     display: block;
-    font-family: 'Karla';
     font-weight: normal;
     font-size: 14px;
     line-height: 16px;
@@ -235,16 +245,12 @@ const Home: React.FC = () => {
       {propertiesAreFetching && <Loader />}
 
       {/* Top/Heading Section */}
-      <Section primary>
-        <StyledEvictionSvg />
-        <Heading>
-          Are you <strong>at risk of eviction</strong> in Tulsa County?
-        </Heading>
-        <Copy>
-          If you received a notice or a summons <strong>after March 27</strong>, you may qualify for
-          protection under the CARES act.
-        </Copy>
-      </Section>
+      <HeadingWrapper>
+        <Spacer height='48px' />
+        <Heading>Are you being evicted?</Heading>
+        <Subheading>We can connect you to help</Subheading>
+        <Copy>Use this resource to find out if your property is covered by the CARES Act</Copy>
+      </HeadingWrapper>
 
       {/* Search Section */}
       <SearchWrapper>

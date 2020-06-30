@@ -11,7 +11,7 @@ body,
 html {
   width: 100vw;
   background-color: #0d0d0d;
-  font-family: 'Karla', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   color: #ffffff;
   /* Allow for fixed footer */
@@ -23,8 +23,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Rubik', sans-serif;
+  font-family: 'Oswald', sans-serif;
   font-weight: bold;
+  letter-spacing: 0.02em;
 }
 a {
   color: #287b71;
@@ -35,7 +36,7 @@ button:focus {
 }
 
 ::selection {
-  background: #287b71;
+  background: #69bfb5;
   color: white;
 }
 

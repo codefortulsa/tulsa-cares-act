@@ -1,7 +1,3 @@
-<p align="center">
-  <img width="64" height="64" src='./src/img/eviction.svg?raw=true' alt="Food for Thought OK" />
-</p>
-
 <h3 align="center">
   <b>See if a property in Tulsa County is eligible for eviction protection under the CARES act at <a href="https://TulsaCaresAct.com">TulsaCaresAct.com</a></b>
 </h3>

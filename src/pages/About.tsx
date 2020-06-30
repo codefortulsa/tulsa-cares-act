@@ -12,6 +12,7 @@ import Spacer from '../components/Spacer';
 const Heading = styled.h1`
   margin: 0;
   padding: 0 0 12px;
+  text-transform: uppercase;
   font-size: 28px;
   line-height: 34px;
 `;
@@ -55,6 +56,7 @@ const LogoLink = styled.a`
 const SecondaryHeading = styled.h2`
   margin: 0;
   padding: 0 0 12px;
+  text-transform: uppercase;
   font-size: 28px;
   line-height: 34px;
   color: ${({ theme }) => theme.white};

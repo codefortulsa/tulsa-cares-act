@@ -14,10 +14,12 @@ import Spacer from '../components/Spacer';
 const PropertyName = styled.h1`
   margin: 0;
   font-size: 28px;
-  line-height: 34px;
+  line-height: 32px;
+  padding-bottom: 4px;
 `;
 const PropertyAddress = styled.h2`
-  font-family: 'Karla';
+  font-family: 'Open Sans';
+  letter-spacing: 0;
   margin: 0;
   font-size: 16px;
   line-height: 20px;
@@ -29,9 +31,10 @@ const PropertyAddress = styled.h2`
 `;
 const CoveredHeading = styled.h3`
   margin: 0;
-  padding: 24px 0 8px;
-  font-size: 24px;
-  line-height: 28px;
+  padding: 24px 0 12px;
+  text-transform: uppercase;
+  font-size: 26px;
+  line-height: 32px;
   color: ${({ theme }) => theme.white};
   strong {
     text-decoration: underline;
@@ -58,24 +61,29 @@ const CoveredHeading = styled.h3`
 `;
 const CoveredCopy = styled.p`
   margin: 0;
-  padding: 0 0 24px;
+  padding: 0 0 32px;
   line-height: 20px;
   color: ${({ theme }) => theme.grey.light};
   strong {
     color: ${({ theme }) => theme.grey.lighter};
   }
 `;
+const Break = styled.div`
+  width: 100%;
+  height: 4px;
+  background-color: ${({ theme }) => theme.primary};
+`;
 const List = styled.ul`
   list-style: none;
   font-size: 20px;
-  line-height: 22px;
-  padding: 0;
+  line-height: 24px;
+  padding: 24px 0 0;
   color: ${({ theme }) => theme.grey.light};
   strong {
     color: ${({ theme }) => theme.grey.lighter};
   }
   li {
-    padding: 0 0 16px 24px;
+    padding: 0 0 16px 32px;
     position: relative;
     display: block;
     &::before {
@@ -129,13 +137,26 @@ const FlyerButton = styled.button`
     }
   }
 `;
-const FlyerModal = styled.div<{ show: boolean }>`
+const FlyerModalWrapper = styled.div<{ show: boolean }>`
   z-index: 1000;
   position: fixed;
-  top: 12px;
-  left: 12px;
-  height: calc(100vh - 24px);
-  width: calc(100vw - 24px);
+  overflow: hidden;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  padding: 12px;
+  background-color: rgba(0, 0, 0, 0.8);
+
+  opacity: ${({ show }) => (show ? 1 : 0)};
+  transition: opacity 400ms ease;
+  pointer-events: ${({ show }) => (show ? 'auto' : 'none')};
+`;
+const FlyerModal = styled.div<{ show: boolean }>`
+  height: 100%;
+  width: 100%;
+  max-width: 768px;
+  margin: 0 auto;
   background-color: ${({ theme }) => theme.grey.lightest};
   border-radius: 12px;
   box-shadow: 0px 0px 0.996336px rgba(13, 13, 13, 0.0383252),
@@ -146,13 +167,11 @@ const FlyerModal = styled.div<{ show: boolean }>`
   -webkit-overflow-scrolling: touch;
 
   transform: ${({ show }) => (show ? 'scale(1)' : 'scale(0)')};
-  opacity: ${({ show }) => (show ? 1 : 0)};
-  transition: transform 400ms ease, opacity 400ms ease;
+  transition: transform 400ms ease;
 
   img {
     display: block;
     width: calc(100% - 24px);
-    max-width: 768px;
     margin: 16px auto;
     border-radius: 8px;
     box-shadow: 0px 0px 0.996336px rgba(13, 13, 13, 0.0383252),
@@ -179,9 +198,6 @@ const ModalHeader = styled.div`
   span {
     flex: 1;
   }
-  /* box-shadow: 0px 0px 0.996336px rgba(13, 13, 13, 0.0383252),
-    0px 0px 2.75474px rgba(13, 13, 13, 0.055), 0px 0px 6.63236px rgba(13, 13, 13, 0.0716748),
-    0px 0px 22px rgba(13, 13, 13, 0.11); */
 `;
 
 const Property: React.FC = () => {
@@ -302,6 +318,7 @@ const Property: React.FC = () => {
           )}
 
           {/* Next steps */}
+          <Break />
           <List>
             <li>
               <a href='tel:211' onClick={() => analytics.logEvent('dial-211')}>
@@ -345,23 +362,31 @@ const Property: React.FC = () => {
       <Footer />
 
       {/* Eviction Resource Flyer ( Modal ) */}
-      <FlyerModal show={showFlyer}>
-        <ModalHeader>
-          <span />
-          <button
-            onClick={() => {
-              setShowFlyer(false);
-              analytics.logEvent('hide-flyer');
-            }}
-          >
-            Close
-          </button>
-        </ModalHeader>
-        <img
-          src='/img/CSC_211EOK-EvictionResourceFlyer_6.11.20.png'
-          alt='Eviction Resource Flyer'
-        />
-      </FlyerModal>
+      <FlyerModalWrapper
+        show={showFlyer}
+        onClick={() => {
+          setShowFlyer(false);
+          analytics.logEvent('hide-flyer');
+        }}
+      >
+        <FlyerModal show={showFlyer}>
+          <ModalHeader>
+            <span />
+            <button
+              onClick={() => {
+                setShowFlyer(false);
+                analytics.logEvent('hide-flyer');
+              }}
+            >
+              Close
+            </button>
+          </ModalHeader>
+          <img
+            src='/img/CSC_211EOK-EvictionResourceFlyer_6.11.20.png'
+            alt='Eviction Resource Flyer'
+          />
+        </FlyerModal>
+      </FlyerModalWrapper>
     </>
   );
 };
